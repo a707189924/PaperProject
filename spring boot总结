@@ -1,0 +1,92 @@
+1.spring
+	1.spring？（容器框架，解决业务逻辑层与其他逻辑层松耦合的问题）
+		轻量级，分层框架（IOC,AOP,ORM,DAO,WEB,CONTEXT,MVC,CORE）。
+		整合，利用了现有的技术，并为现有的一些java API提供了封装	并提供了自己的web MVC框架
+		容器，包含管理应用对象的生命周期与配置，使用JavaBean(属性，构造方法，方法，序列化)来代替EJB
+			JavaBean:一种规范的Java对象
+			EJB:一种技术规范与标准，描述了构建应用组件要解决一些问题
+	2.spring IOC？
+		控制反转（依赖注入，依赖查找（依赖于JNDI），依赖拖拽（配置通过xml文件来完成，与依赖查找本质区别在依赖查找通过业务组件中代码进行而非集中注册处，特定地点执行））
+		依赖注入的三种方式：构造方法，设值函数（setter）,接口注入
+		IOC容器如何工作？主要通过反射与工厂方法来实现。
+				1.准备配置文件，声明bean定义，为bean配置元数据
+				2.IOC解析元数据，IoC容器的Bean Reader读取并解析配置文件，根据定义生成BeanDefinition配置元数据对象，IoC容器根据BeanDefinition进行实例化、配置及组装Bean。
+				3.实例化IoC容器：由客户端实例化容器，获取需要的Bean。
+	3.spring AOP？
+		OOP:针对业务过程实体属性与行为进行封装，获得更加清晰的逻辑单元
+		AOP:针对业务过程中的切面，面对处理过程中的某个步骤或者阶段来获得逻辑过程中各部分之间低耦合的隔离效果。
+		实现方式:静态与动态代理
+			静态代理：AspectJ，在编译阶段将Aspect织入java字节码中
+			动态代理：Spring的实现方式，AOP不修改java字节码，只是在内存中临时生成一个AOP对象，包含了目标对象的全部方法，并在特定切点做增强处理，并回调原对象方法				JDK动态代理：通过反射来接收被代理的类，并且要求被代理的类必须实现一个接口。JDK动态代理的核心是InvocationHandler接口和Proxy类。
+				CGLIB动态代理：没有实现接口时的方式，是一个代码生成的类库，可以在运行时动态的生成某个类的子类，通过继承来做动态代理，代理的类不能为final
+	4.常用注解？
+		组合类注解：component  service repository controller restcontroller
+		bean注入：autowired: qualifier resource:不是spring注解，默认byName
+		configuration:表示这个类可以使用IOC容器作为bean定义的来源。  bean：返回一个对象，该对象应该被注册为spring应用上下文中的bean
+		requestbody responsebody requestparam requestmapping pathvariable
+		
+2.spring mvc
+	1.mvc?与三层架构的区别？
+		mvc:model（包括数据承载bean（vo,bean）与业务逻辑bean(service,dao,controller)）,view,controller
+		三层架构：界面层，业务逻辑层，数据访问层
+	2.spring mvc请求处理过程？与原理？
+
+		
+		1.用户向服务器发送请求，请求被Spring 前端控制Servelt DispatcherServlet捕获；
+      	2.DispatcherServlet对请求URL进行解析，得到请求资源标识符（URI）。然后根据该URI，调用HandlerMapping获得该Handler配置的所有相关的对象（包括Handler对象以及Handler对象对应的拦截器），最后以HandlerExecutionChain对象的形式返回；
+      	3.DispatcherServlet 根据获得的Handler，选择一个合适的HandlerAdapter。（附注：如果成功获得HandlerAdapter后，此时将开始执行拦截器的preHandler(...)方法）
+       	4.提取Request中的模型数据，填充Handler入参，开始执行Handler（Controller)。 在填充Handler的入参过程中，根据你的配置，Spring将帮你做一些额外的工作：
+      	HttpMessageConveter： 将请求消息（如Json、xml等数据）转换成一个对象，将对象转换为指定的响应信息
+      	数据转换：对请求消息进行数据转换。如String转换成Integer、Double等
+      	数据根式化：对请求消息进行数据格式化。 如将字符串转换成格式化数字或格式化日期等
+      	数据验证： 验证数据的有效性（长度、格式等），验证结果存储到BindingResult或Error中
+      	5.Handler执行完成后，向DispatcherServlet 返回一个ModelAndView对象；
+      	6.根据返回的ModelAndView，选择一个适合的ViewResolver（必须是已经注册到Spring容器中的ViewResolver)返回给DispatcherServlet ；
+      	7.ViewResolver 结合Model和View，来渲染视图
+      	8.将渲染结果返回给客户端。
+3.spring boot
+	1.微服务架构？
+		msa:应用被构建为多个不同的小型服务的集合而不是单个应用系统。服务区别于系统，是一个或者一组相对独立且较小的功能单元，使用户感知的最小功能集。
+		soa:将应用程序的不同服务通过这些服务之间定义良好的接口联系起来，在于应用程序的可重用性的最大化。
+		restful(表述性状态转移)，一种架构的规范与约束
+			三种主流的web服务实现方案
+				rest:从资源的角度来看整个网络，分布在各处的资源由uri决定，而客户端通过uri来获取资源的表征
+				soap(简单对象访问协议)：主要用于web服务中，数据由标准的可分析的结构来传递（xml，json）
+				xml-rpc:xml封装调用函数，http作为传送机制
+		
+	2.spring boot作用？
+		可以不用或者很少的配置，创建一个独立运行，准生产机基于spring框架项目。
+		内嵌servlet容器，自动配置spring,无代码生成与xml配置
+	3.springbootapplication？
+		springbootconfiguration:本质为configuration，表明该类是一个IOC容器的配置类，
+		enableautoconfituration:开启springboot自动配置功能，根据依赖，自定义bean,classpath类将可能使用到的bean注册到IOC容器中。借助@import支持，收集和注册特定场景的相关bean定义。SpringFactoriesLoader,从classpath中搜索所有的META-INF/spring.factories配置文件，将其中对应的配置项通过反射实例化为对应标注@configuration的javaconfig形式的IOC容器配置类，汇总为一个并加载到IOC容器。
+		componentscan:启用组件扫描，自动扫描所有通过注解配置的bean,将其注册到IOC容器中。通过指定basepackages指定扫描范围，不指定则为componentscan所在包下
+	4.spring boot启动流程？
+4.mybatis（持久层框架）
+	1.mybatis处理过程与原理？
+		1.由sqlsessionfactorybuilder构建sqlsessionfactory(分为xml与javaconfig两种方式)
+		2.从sqlsessionfactory中获取sqlsession
+		3.sqlsession执行已经映射的语句
+			mapper映射通过动态代理来实现，调用某个方法时，调用MapperProxy#invoke方法，映射器的xml的命名空间就对应这个接口的全路径，根据全路径和方法名绑定起来，对应到sql，最后使用sqlsession接口的方法执行。
+5.代码结构。
+MVC中，数据库访问复杂使M层冗余，业务复杂使得C层复杂，通过划分dao，controller,service将整个数据的处理做更细粒度的分割。dao与数据库做访问处理，service业务逻辑层对业务处理，切面与认证都在这个层面进行，controller用来获取前端访问，并对业务逻辑进行流程控制。
+Controller:业务模块流程控制
+Service:业务逻辑层
+Dao:数据持久化
+VO:JavaBean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+JNDI(java naming and directory interface)：包含了大量的java命名与目录服务，使用通用接口来访问不同种类的服务。
+无状态协议：把每一个请求作为一个与之前无关的独立事物服务器，无需其上下文。
