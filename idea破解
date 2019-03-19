@@ -1,0 +1,8 @@
+1、Idea安装最好默认路径
+2、下载破解补丁JetbrainsCrack-3.1-release-enc.jar（已下载）
+3、将下载的补丁放入到%IDEA_HOME%\bin下（%IDEA_HOME%\为自己安装idea的根目录，如C:\Program Files\JetBrains\IntelliJ IDEA 2018.2.1）
+4、分别在bin下idea.exe.vmoptions和idea64.exe.vmoptions文件的最后一行添加
+-javaagent:%IDEA_HOME%\bin\JetbrainsCrack-3.1-release-enc.jar即可，这时关闭IDEA，并重新打开IDEA
+5、选择activation code将下边的激活码，复制到下边的框中，点击OK，激活成功！
+激活代码：
+{"licenseId":"1337",  "licenseeName":"Downloadly",  "assigneeName":"Downloadly",  "assigneeEmail":"Downloadly@Downloadly.ir",  "licenseRestriction":"Unlimited license till end of the century.",  "checkConcurrentUse":false,"products":[{"code":"II","paidUpTo":"2099-12-31"},{"code":"DM","paidUpTo":"2099-12-31"},{"code":"AC","paidUpTo":"2099-12-31"},{"code":"RS0","paidUpTo":"2099-12-31"},{"code":"WS","paidUpTo":"2099-12-31"},{"code":"DPN","paidUpTo":"2099-12-31"},{"code":"RC","paidUpTo":"2099-12-31"},{"code":"PS","paidUpTo":"2099-12-31"},{"code":"DC","paidUpTo":"2099-12-31"},{"code":"RM","paidUpTo":"2099-12-31"},{"code":"CL","paidUpTo":"2099-12-31"},{"code":"PC","paidUpTo":"2099-12-31"},{"code":"DB","paidUpTo":"2099-12-31"},{"code":"GO","paidUpTo":"2099-12-31"},{"code":"RD","paidUpTo":"2099-12-31"}],  "hash":"2911276/0",  "gracePeriodDays": 7,  "autoProlongated": false}
